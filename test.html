@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>寒假预热</title>
+		<link href="next.css" rel="stylesheet" type="text/css" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<p id="titlename" v-bind:style="styletest">{{mess1}}</p>
+		<div id="part2">
+			<input id="add" v-model="list" placeholder="what do you want to do today?"></input>
+			<button id="btn" v-on:click="addd">Add</button>
+			<p id="box1">待办事项</p>
+			<p id="count1">{{count}}</p>
+			<ul id="box3">
+				<li v-for="item,index in items"><input v-model="item" class="iiiii"></input>&nbsp;&nbsp;<button class="dele" v-on:click="clickfun(index)">删除</button></li>
+			</ul>
+			<p id="box4">已完成</p>
+			<p id="count2">{{count1}}</p>
+			<ul id="box5">
+				<li v-for="done,index in dones"><input v-model="done" class="iiiii1"></input>&nbsp;&nbsp;<button class="dele1" v-on:click="clickfun2(index)">删除</button></li>
+			</ul>
+		</div>
+		<script>
+			var vm = new Vue({
+				el:'#titlename',
+				data :{
+					mess1:'ToDoList'
+				}
+			});
+			var v2 =new Vue({
+				el:'#part2',
+				data:{
+					list:'',
+					count:0,
+					items:[],
+					count1:0,
+					dones:[]
+				},
+				methods:{
+					addd:function(){
+						this.count+=1,
+						this.items.push(this.list)
+					},
+					clickfun:function(e){
+						this.count-=1,
+						this.dones.push(this.items[e]),
+						this.items.splice(e,1),
+						this.count1+=1
+					},
+					clickfun2:function(e){
+						this.count1-=1,
+						this.dones.splice(e,1)
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
